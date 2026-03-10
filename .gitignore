@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+
+# Environment files
+.env
+.env.local
+
+# OS files
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+
+# Generated output
+src_rust/
+legacy_delphi/

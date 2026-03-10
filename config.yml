@@ -1,0 +1,22 @@
+# Delphi to Rust AI Orchestrator configuration.
+# Edit these values to customize model, token limits, and output layout.
+
+llm:
+  # Default model used for translation & test generation.
+  # If you see a NotFoundError, switch to a model that is supported in your
+  # Anthropic account (e.g. `claude-haiku-4-5-20251001`).
+  model: "claude-haiku-4-5-20251001"
+
+  # Higher-quality model placeholder (not used by default).
+  # high_quality_model: "claude-sonnet-4-6"
+
+  # Generation settings
+  temperature: 0.1
+  translate_max_tokens: 1200
+  tests_max_tokens: 800
+
+paths:
+  legacy_dir: "./legacy_delphi"
+  target_dir: "./src_rust"
+  rust_subdir: "src"
+  tests_subdir: "tests"

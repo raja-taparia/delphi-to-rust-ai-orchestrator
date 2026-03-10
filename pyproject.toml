@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "delphi_to_rust-ai-orchestrator"
+version = "0.1.0"
+description = "AI-driven orchestrator for migrating Delphi code to Rust using Anthropic Claude."
+authors = [
+  { name = "Delphi to Rust AI Orchestrator" }
+]
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["delphi_to_rust_ai_orchestrator"]

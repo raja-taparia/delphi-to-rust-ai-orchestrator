@@ -1,0 +1,162 @@
+Metadata-Version: 2.4
+Name: delphi_to_rust-ai-orchestrator
+Version: 0.1.0
+Summary: AI-driven orchestrator for migrating Delphi code to Rust using Anthropic Claude.
+Author: Delphi to Rust AI Orchestrator
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+
+# Delphi to Rust AI Orchestrator
+
+A minimal, opinionated orchestrator that demonstrates how to migrate legacy Delphi logic into idiomatic Rust using an LLM (Anthropic Claude) and generate Golden Master tests.
+
+This project is intentionally small and structured to be easy to extend.
+
+---
+
+## 🚀 Quick Start
+
+### 1) Create and activate a Python virtual environment (recommended)
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### 2) Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3) Install the package in editable mode
+
+```bash
+pip install -e .
+```
+
+### 4) Configure your Anthropic API key
+
+```bash
+cp .env .env.local
+# Edit .env.local and set your API key
+```
+
+### 5) (Optional) Tune behavior via `config.yml`
+
+`config.yml` controls:
+- which Anthropic model is used
+- token limits for translation + test generation
+- output directory structure
+
+---
+
+## ▶️ Run the orchestrator
+
+```bash
+python -m delphi_to_rust_ai_orchestrator
+```
+
+### CLI options
+
+```bash
+python -m delphi_to_rust_ai_orchestrator \
+  --legacy-dir ./legacy_delphi \
+  --target-dir ./out \
+  --rust-dir src \
+  --tests-dir tests \
+  --config config.yml
+```
+
+Run without writing output:
+
+```bash
+python -m delphi_to_rust_ai_orchestrator --dry-run
+```
+
+Override the API key (not required if `.env` is configured):
+
+```bash
+python -m delphi_to_rust_ai_orchestrator --api-key "<your_key>"
+```
+
+---
+
+## ✅ Recommended commands (Makefile)
+
+```bash
+make install  # install dependencies + editable package
+make run      # run the orchestrator
+make test     # run unit tests
+make clean    # clean build artifacts
+```
+
+---
+
+## 🗂 Project Structure
+
+- `src/delphi_to_rust_ai_orchestrator/` — main package source
+- `tests/` — unit tests
+- `config.yml` — engine defaults (model, token limits, output paths)
+- `.env` — local secrets (API key)
+- `pyproject.toml` — packaging metadata
+- `Makefile` — convenience commands
+
+---
+
+## 🧠 How It Works
+
+1. The pipeline reads legacy Delphi code (currently mocked).
+2. It calls Anthropic Claude to translate Delphi → Rust.
+3. It calls Anthropic Claude to generate Golden Master tests.
+4. It writes generated outputs to the configured directory.
+
+---
+
+## 🧪 Testing
+
+```bash
+make test
+```
+
+---
+
+## � Example output (dry-run)
+
+```text
+--- Starting Delphi to Rust Migration Pipeline ---
+⚠️  No legacy Delphi sources found. Falling back to a mocked example.
+🚀 Initializing AI-Assisted Extraction for module: mocked_ping_sensor...
+🛡️ Generating Golden Master / Characterization Tests...
+
+✅ AI Extraction Complete. Ready for Human Architectural Review.
+Preview of generated Rust (Async Tokio implementation):
+----------------------------------------
+use tokio::net::TcpStream;
+use std::net::SocketAddr;
+
+pub async fn execute_ping(ip: &str) -> Result<u32, Error> {... }
+```
+
+---
+
+## 🤝 How to contribute / extend
+
+This project is intentionally small, so contributions are welcome.
+
+1. Fork the repo and create a feature branch.
+2. Add or improve the parser in `src/delphi_to_rust_ai_orchestrator/legacy.py`.
+3. Update prompts in `src/delphi_to_rust_ai_orchestrator/prompts.py` or improve generation in `src/delphi_to_rust_ai_orchestrator/translator.py`.
+4. Add tests under `tests/` and run `make test`.
+5. Submit a PR with a short description of your change.
+
+---
+
+## �🔧 Next Improvements
+
+- Add real Delphi parsing + discovery
+- Improve output formatting and module naming
+- Add richer CLI configuration
+- Add integration tests and error reporting
